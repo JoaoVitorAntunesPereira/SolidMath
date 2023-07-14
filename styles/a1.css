@@ -231,12 +231,29 @@ body{
     margin-bottom: 8px;
 }
 
-input[type=range]:focus{
+input[type="range"]{
     outline: none;
 }
 
-input[type=range]{
+input[type="range"]:focus{
     outline: none;
+}
+
+.inp_raio_1{
+    accent-color: rgb(40, 40, 40);
+    /* accent-color: rgb(8, 187, 207); */
+}
+
+.inp_L_1{
+    accent-color: rgb(0, 64, 255);
+}
+
+.inp_a_1{
+    accent-color: rgb(255, 64, 0);
+}
+
+.inp_h_1{
+    accent-color: red;
 }
 
 .inp_raio_2{
@@ -247,10 +264,10 @@ input[type=range]{
     accent-color: rgb(255, 0, 255);
 }
 
-.inp_h_1{
-    accent-color: rgb(255, 0, 2);
+.inp_ab_1{
+    accent-color: rgb(255, 255, 0);
 }
 
-.inp_ab_1{
+.inp_an_1{
     accent-color: rgb(255, 255, 0);
 }

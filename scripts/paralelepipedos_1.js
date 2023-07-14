@@ -238,12 +238,6 @@ function animate() {
 
     scene_1.remove(paralel_lines_1);
 
-    //paralel_lines_1.rotation.z = 0.8;
-    //paralel_lines_1.rotation.x = -Math.PI / 5;
-    //paralel_lines_1.rotation.y -= 0.005;
-
-    //paralel_lines_1.rotation.x += -0.005;
-
     cameraRotationAngle_1 = rotateCamera_Circle_1(camera_1, camera_radius_1, cameraRotationVelocity_1, cameraRotationAngle_1);
 
     rezizeCamera_Render_1();//Sob alterações na resolução da tela
@@ -291,7 +285,7 @@ function animate() {
     lado_geometry_2 = new THREE.BufferGeometry().setFromPoints(lado_points_2);
     lado_line_2 = new THREE.Line(lado_geometry_2, lado_material_1);
 
-    Ab1 = (1 / 2) * Lb1 * ab;//Área da base
+    Ab1 = (1 / 2) * Lb1 * ab * n1;//Área da base
     Al1 = Lb1 * h1;//Área lateral (de cada face lateral)
     Alt1 = Al1 * n1;//Área lateral total
     At1 = 2 * Ab1 + Alt1;//Área total

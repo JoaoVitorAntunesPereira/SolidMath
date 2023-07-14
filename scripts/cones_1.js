@@ -10,10 +10,12 @@ const d3_viewer_1 = document.querySelector("#idD3_viewer_1");
 var rangeInp_1 = document.querySelector("#idRange_1");
 var rangeInp_2 = document.querySelector("#idRange_2");
 var rangeInp_3 = document.querySelector("#idRange_3");
+var rangeInp_4 = document.querySelector("#idRange_4");
 
 var lb_1 = document.querySelector("#idLabel_1");
 var lb_2 = document.querySelector("#idLabel_2");
 var lb_3 = document.querySelector("#idLabel_3");
+var lb_4 = document.querySelector("#idLabel_4");
 
 const scene_1 = new THREE.Scene();
 scene_1.background = new THREE.Color("rgb(16, 17, 22)");
@@ -32,6 +34,7 @@ var n1 = 1000;
 var r1 = parseFloat(rangeInp_1.value) / divisor_1;
 var h1 = parseFloat(rangeInp_2.value) / divisor_1;
 var th1 = (parseFloat(rangeInp_3.value) / 180) * Math.PI;
+var g1 = Math.sqrt(h1 ** 2 + r1 ** 2);
 
 lb_1.textContent = "Raio: r = " + r1.toString() + ";";
 lb_2.textContent = "Altura: h = " + h1.toString() + ";";
@@ -45,6 +48,8 @@ const height_material_1 = new THREE.LineBasicMaterial({color: 0xff0000});
 
 const radius_material_1 = new THREE.LineBasicMaterial({color: 0x00ff00});
 
+const g_material_1 = new THREE.LineBasicMaterial({color: 0xff00ff});
+
 var s_ang1 = (Math.PI / 2) * (4 / 12);//1: (4 / 12); 0.5: (8 / 12); 0.24: (10 / 12);
 
 var ang1 = (Math.PI / 2) + s_ang1;
@@ -55,7 +60,7 @@ var rotationLados_1_1 = 0;
 var rotationLados_2 = ang1;
 var rotationLados_2_1 = 0;
 
-var cylinder_geometry_1 = new THREE.CylinderGeometry(r1, r1, h1, n1, 0, false, 0, th1);
+var cylinder_geometry_1 = new THREE.ConeGeometry(r1, h1, n1, 0, false, 0, th1);
 var cylinder_edges_1 = new THREE.EdgesGeometry(cylinder_geometry_1); 
 //const cylinder_lines_1 = new THREE.Mesh(cylinder_geometry_1, mesh_cylinder_material);
 var cylinder_lines_1 = new THREE.LineSegments(cylinder_edges_1, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
@@ -110,6 +115,14 @@ var l_cylinder_line_4 = new THREE.Line(l_cylinder_geometry_4, l_cylinder_materia
 
 //scene_1.add(l_cylinder_line_4);
 
+var g_points_1 = [];
+g_points_1.push(new THREE.Vector3(0, h1 / 2, 0));
+g_points_1.push(new THREE.Vector3(0, -h1 / 2, r1));
+var g_geometry_1 = new THREE.BufferGeometry().setFromPoints(g_points_1);
+var g_line_1 = new THREE.Line(g_geometry_1, g_material_1);
+
+scene_1.add(g_line_1);
+
 //const axesHelper = new THREE.AxesHelper( 5 );
 //scene_1.add(axesHelper);
 
@@ -118,7 +131,7 @@ var cameraRotationAngle_1 = Math.PI / 4 + s_ang1 / 2;//Em radianos;
 var cameraRotationVelocity_1 = 0.005;//Em radianos;
 
 var camera_xPosition = 0;
-var camera_yPosition = 0.8;
+var camera_yPosition = 0.3;
 var camera_zPosition = camera_radius_1;
 
 camera_1.position.set(camera_xPosition, camera_yPosition, camera_zPosition);
@@ -129,12 +142,12 @@ const rotateVelocity_1 = 0.005;
 rangeInp_1.addEventListener("input", range_onChange_1);
 rangeInp_2.addEventListener("input", range_onChange_2);
 rangeInp_3.addEventListener("input", range_onChange_3);
-
+rangeInp_4.addEventListener("input", range_onChange_4);
 
 function range_onChange_1(){
     r1 = parseFloat(rangeInp_1.value) / divisor_1;
 
-    updateLabels_1();
+    g1 = Math.sqrt(h1 ** 2 + r1 ** 2);
     
     updateAng_1();
 }
@@ -142,25 +155,42 @@ function range_onChange_1(){
 function range_onChange_2(){
     h1 = parseFloat(rangeInp_2.value) / divisor_1;
 
-    updateLabels_1();
+    g1 = Math.sqrt(h1 ** 2 + r1 ** 2);
 }
 
 function range_onChange_3(){
     th1 = (parseFloat(rangeInp_3.value) / 180) * Math.PI;
+}
 
-    updateLabels_1();
+function range_onChange_4(){
+    g1 = parseFloat(rangeInp_4.value) / divisor_1;
+
+    if(g1 > r1){
+        h1 = Math.sqrt(g1 ** 2 - r1 ** 2);
+    }
+    else{
+        r1 = Math.sqrt(g1 ** 2 - h1 ** 2);
+    }
 }
 
 function updateLabels_1(){
-    lb_1.textContent = "Raio: r = " + r1.toString() + ";";
-    lb_2.textContent = "Altura: h = " + h1.toString() + ";";
+    lb_1.textContent = "Raio: r = " + r1.toFixed(2).toString() + ";";
+    lb_2.textContent = "Altura: h = " + h1.toFixed(2).toString() + ";";
     lb_3.textContent = "Ângulo da seção: θ = " + ((th1 / Math.PI) * 180).toFixed(2).toString() + " deg;";
+    lb_4.textContent = "Geratriz: g = " + g1.toFixed(2).toString() + ";";
+}
+
+function updateRanges_1(){
+    rangeInp_1.value = r1 * divisor_1;
+    rangeInp_2.value = h1 * divisor_1;
+    rangeInp_3.value = (th1 / (Math.PI * 2)) * 360;
+    rangeInp_4.value = g1 * divisor_1;
 }
 
 function updateMainObject_1(){
     scene_1.remove(cylinder_lines_1);
     
-    cylinder_geometry_1 = new THREE.CylinderGeometry(r1, r1, h1, n1, 0, false, 0, th1);
+    cylinder_geometry_1 = new THREE.ConeGeometry(r1, h1, n1, 0, false, 0, th1);
     //cylinder_lines_1.geometry.dispose();
     //cylinder_lines_1.geometry = new THREE.CylinderGeometry(r1, r1, h1, n1, 1, false, 0, th1);
     cylinder_edges_1 = new THREE.EdgesGeometry(cylinder_geometry_1);
@@ -177,7 +207,7 @@ function updateLados_1(){
         scene_1.remove(l_cylinder_line_1);
 
         l_cylinder_points_1 = [];
-        l_cylinder_points_1.push(new THREE.Vector3(0, h1 / 2, r1));
+        l_cylinder_points_1.push(new THREE.Vector3(0, h1 / 2, 0));
         l_cylinder_points_1.push(new THREE.Vector3(0, -h1 / 2, r1));
         l_cylinder_geometry_1 = new THREE.BufferGeometry().setFromPoints(l_cylinder_points_1);
         l_cylinder_line_1 = new THREE.Line(l_cylinder_geometry_1, l_cylinder_material_1);
@@ -197,7 +227,7 @@ function updateLados_1(){
         l_cylinder_points_2 = [];
         //l_cylinder_points_2.push(new THREE.Vector3(r1 * Math.sin(ang1), h1 / 2, r1 * Math.cos(ang1)));
         //l_cylinder_points_2.push(new THREE.Vector3(r1 * Math.sin(ang1), -h1 / 2, r1 * Math.cos(ang1)));
-        l_cylinder_points_2.push(new THREE.Vector3(0, h1 / 2, r1));
+        l_cylinder_points_2.push(new THREE.Vector3(0, h1 / 2, 0));
         l_cylinder_points_2.push(new THREE.Vector3(0, -h1 / 2, r1));
         l_cylinder_geometry_2 = new THREE.BufferGeometry().setFromPoints(l_cylinder_points_2);
         l_cylinder_line_2 = new THREE.Line(l_cylinder_geometry_2, l_cylinder_material_1);
@@ -218,7 +248,7 @@ function updateLados_2(){
         scene_1.remove(l_cylinder_line_4);
 
         l_cylinder_points_3 = [];
-        l_cylinder_points_3.push(new THREE.Vector3(0, h1 / 2, r1));
+        l_cylinder_points_3.push(new THREE.Vector3(0, h1 / 2, 0));
         l_cylinder_points_3.push(new THREE.Vector3(0, -h1 / 2, r1));
         l_cylinder_geometry_3 = new THREE.BufferGeometry().setFromPoints(l_cylinder_points_3);
         l_cylinder_line_3 = new THREE.Line(l_cylinder_geometry_3, l_cylinder_material_1);
@@ -226,7 +256,7 @@ function updateLados_2(){
         //scene_1.add(l_cylinder_line_3);
 
         l_cylinder_points_4 = [];
-        l_cylinder_points_4.push(new THREE.Vector3(r1 * Math.sin(th1), h1 / 2, r1 * Math.cos(th1)));
+        l_cylinder_points_4.push(new THREE.Vector3(0, h1 / 2, 0));
         l_cylinder_points_4.push(new THREE.Vector3(r1 * Math.sin(th1), -h1 / 2, r1 * Math.cos(th1)));
         l_cylinder_geometry_4 = new THREE.BufferGeometry().setFromPoints(l_cylinder_points_4);
         l_cylinder_line_4 = new THREE.Line(l_cylinder_geometry_4, l_cylinder_material_1);
@@ -241,7 +271,7 @@ function updateLados_2(){
 }
 
 function updateAng_1(){
-    s_ang1 = (Math.PI / 2) * (((4 * (1 / Math.cbrt(Math.sqrt(r1))))) / 12);//1: (4 / 12); 0.5: (8 / 12); 0.24: (10 / 12);
+    s_ang1 = (Math.PI / 2) * (((5.35 * (1 / Math.sqrt(Math.sqrt(Math.sqrt(r1)))))) / 12);//1: (4 / 12); 0.5: (8 / 12); 0.24: (10 / 12);
     //s_ang1 = (Math.PI / 2) * (4 / 12);//1: (8 / 12); 0.5: ();
 
     rotationLados_2 = cameraRotationAngle_1 + s_ang1 * 2 - rotationLados_2_1;
@@ -279,11 +309,25 @@ function updateRadius_1(){
     scene_1.add(radius_line_1);
 }
 
+function updateG_1(){
+    scene_1.remove(g_line_1);
+
+    g_points_1 = [];
+    g_points_1.push(new THREE.Vector3(0, h1 / 2, 0));
+    g_points_1.push(new THREE.Vector3(0, -h1 / 2, r1));
+    g_geometry_1 = new THREE.BufferGeometry().setFromPoints(g_points_1);
+    g_line_1 = new THREE.Line(g_geometry_1, g_material_1);
+
+    g_line_1.rotation.y = th1 / 2;
+
+    scene_1.add(g_line_1);
+}
+
 function updateCalculo_1(){
     Ab1 = (th1 / (2 * Math.PI)) * Math.PI * (r1 ** 2);//Área da base
-    Alt1 = (th1 / (2 * Math.PI)) * 2 * Math.PI * r1 * h1;//Área lateral total
-    At1 = 2 * Ab1 + Alt1;//Área total
-    Vt1 = (th1 / (2 * Math.PI)) * Ab1 * h1;//Volume total
+    Alt1 = (th1 / (2 * Math.PI)) * Math.PI * (g1 ** 2);//Área lateral total
+    At1 = Ab1 + Alt1;//Área total
+    Vt1 = (th1 / (2 * Math.PI)) * (1 / 3) * Ab1 * h1;//Volume total
 }
 
 function rotateCamera_Circle_1(camera, radius1, cameraRotationVelocity1, cameraRotationAngle1){
@@ -362,6 +406,8 @@ function animate() {
 
     updateRadius_1();
 
+    updateG_1();
+
     updateLados_2();
 
     updateLados_1();
@@ -369,6 +415,10 @@ function animate() {
     rotateLados_1();
 
     updateCalculo_1();
+
+    updateLabels_1();
+
+    updateRanges_1();
 
 	renderer_1.render(scene_1, camera_1);
 }

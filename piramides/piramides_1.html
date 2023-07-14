@@ -9,135 +9,58 @@
     <body>
         <div class="main_2">
             <div class="obj_conteiner_1">
-                <div class="obj_title_1">Tetraedro</div>
+                <div class="obj_title_1">Pirâmides</div>
                 <div class="content_conteiner_1">
                     <div class="config_1">
                         <div class="config_content_conteiner_items_1">
                             <div class="config_title_1">Configurações dos parâmetros</div>
                             <br />
                             <br />
-                            <div id="idLabel_1" class="label_1">Raio: r = 1;</div>
-                            <input id="idRange_1" type="range" class="inp_raio_1" min="1" max="100" value="50" />
+                            <div id="idLabel_1" class="label_1">Número de lados da base: n = 1;</div>
+                            <input id="idRange_1" type="range" class="inp_raio_1" min="3" max="20" value="3" />
                             <br />
                             <br />
-                            <div class="label_1">Vértices: V = 4;</div>
-                            <div class="label_1">Faces: F = 4;</div>
-                            <div class="label_1">Arestas: A = 6;</div>
+                            <div id="idLabel_2" class="label_1">Raio da base: r = 1;</div>
+                            <input id="idRange_2" type="range" class="inp_raio_2" min="1" max="100" value="50" />
                             <br />
                             <br />
-                            <div class="label_1">Relação de Euler (V + F = A + 2): </div>
+                            <div id="idLabel_4" class="label_1">Lado da base: Lb = 1;</div>
+                            <input id="idRange_4" type="range" class="inp_Lb_1" min="1" max="100" value="50" />
                             <br />
-                            <div class="label_1">4 + 4 = 6 + 2;</div>
+                            <br />
+                            <div id="idLabel_3" class="label_1">Altura: h = 1;</div>
+                            <input id="idRange_3" type="range" class="inp_h_1" min="1" max="100" value="75" />
+                            <br />
+                            <br />
+                            <div id="idLabel_5" class="label_1">Apótema da base: ab = 1;</div>
+                            <input id="idRange_5" type="range" class="inp_ab_1" min="1" max="100" value="50" />
+                            <br />
+                            <br />
+                            <div id="idLabel_6" class="label_1">Lado da pirâmide: L = 1;</div>
+                            <input id="idRange_6" type="range" class="inp_L_1" min="1" max="100" value="50" />
+                            <br />
+                            <br />
+                            <div id="idLabel_7" class="label_1">Apótema da pirâmide: a = 1;</div>
+                            <input id="idRange_7" type="range" class="inp_a_1" min="1" max="100" value="50" />
                         </div>
                     </div>
                     <div id="idD3_viewer_1" class="d3_viewer_1"></div>
                 </div>
-            </div>
-            <div class="obj_conteiner_1">
-                <div class="obj_title_1">Hexaedro</div>
-                <div class="content_conteiner_1">
-                    <div class="config_1">
-                        <div class="config_content_conteiner_items_1">
-                            <div class="config_title_1">Configurações dos parâmetros</div>
-                            <br />
-                            <br />
-                            <div id="idLabel_2" class="label_1">Raio: r = 1;</div>
-                            <input id="idRange_2" type="range" class="inp_raio_1" min="1" max="100" value="50" />
-                            <br />
-                            <br />
-                            <div class="label_1">Vértices: V = 8;</div>
-                            <div class="label_1">Faces: F = 6;</div>
-                            <div class="label_1">Arestas: A = 12;</div>
-                            <br />
-                            <br />
-                            <div class="label_1">Relação de Euler (V + F = A + 2): </div>
-                            <br />
-                            <div class="label_1">8 + 6 = 12 + 2;</div>
-                        </div>
+                <br />
+                <!-- <br />
+                <br />
+                <div class="obj_title_2">Relações</div>
+                <div class="content_conteiner_2">
+                    <div class="equations_1">
+                        <div id="idLabel_6" class="label_1">$$ {\text{Área da superfície: }\frac{1}{2}\text{ ⋅ Lb ⋅ ab;}} $$</div>
                     </div>
-                    <div id="idD3_viewer_2" class="d3_viewer_1"></div>
-                </div>
-            </div>
-            <div class="obj_conteiner_1">
-                <div class="obj_title_1">Octaedro</div>
-                <div class="content_conteiner_1">
-                    <div class="config_1">
-                        <div class="config_content_conteiner_items_1">
-                            <div class="config_title_1">Configurações dos parâmetros</div>
-                            <br />
-                            <br />
-                            <div id="idLabel_3" class="label_1">Raio: r = 1;</div>
-                            <input id="idRange_3" type="range" class="inp_raio_1" min="1" max="100" value="50" />
-                            <br />
-                            <br />
-                            <div class="label_1">Vértices: V = 6;</div>
-                            <div class="label_1">Faces: F = 8;</div>
-                            <div class="label_1">Arestas: A = 12;</div>
-                            <br />
-                            <br />
-                            <div class="label_1">Relação de Euler (V + F = A + 2): </div>
-                            <br />
-                            <div class="label_1">6 + 8 = 12 + 2;</div>
-                        </div>
+                    <div class="content_conteiner_fronter_1"></div>
+                    <div class="wValues_1">
+
                     </div>
-                    <div id="idD3_viewer_3" class="d3_viewer_1"></div>
-                </div>
-            </div>
-            <div class="obj_conteiner_1">
-                <div class="obj_title_1">Dodecaedro</div>
-                <div class="content_conteiner_1">
-                    <div class="config_1">
-                        <div class="config_content_conteiner_items_1">
-                            <div class="config_title_1">Configurações dos parâmetros</div>
-                            <br />
-                            <br />
-                            <div id="idLabel_4" class="label_1">Raio: r = 1;</div>
-                            <input id="idRange_4" type="range" class="inp_raio_1" min="1" max="100" value="50" />
-                            <br />
-                            <br />
-                            <div class="label_1">Vértices: V = 20;</div>
-                            <div class="label_1">Faces: F = 12;</div>
-                            <div class="label_1">Arestas: A = 30;</div>
-                            <br />
-                            <br />
-                            <div class="label_1">Relação de Euler (V + F = A + 2): </div>
-                            <br />
-                            <div class="label_1">20 + 12 = 30 + 2;</div>
-                        </div>
-                    </div>
-                    <div id="idD3_viewer_4" class="d3_viewer_1"></div>
-                </div>
-            </div>
-            <div class="obj_conteiner_1">
-                <div class="obj_title_1">Icosaedro</div>
-                <div class="content_conteiner_1">
-                    <div class="config_1">
-                        <div class="config_content_conteiner_items_1">
-                            <div class="config_title_1">Configurações dos parâmetros</div>
-                            <br />
-                            <br />
-                            <div id="idLabel_5" class="label_1">Raio: r = 1;</div>
-                            <input id="idRange_5" type="range" class="inp_raio_1" min="1" max="100" value="50" />
-                            <br />
-                            <br />
-                            <div class="label_1">Vértices: V = 12;</div>
-                            <div class="label_1">Faces: F = 20;</div>
-                            <div class="label_1">Arestas: A = 30;</div>
-                            <br />
-                            <br />
-                            <div class="label_1">Relação de Euler (V + F = A + 2): </div>
-                            <br />
-                            <div class="label_1">12 + 20 = 30 + 2;</div>
-                        </div>
-                    </div>
-                    <div id="idD3_viewer_5" class="d3_viewer_1"></div>
-                </div>
+                </div> -->
             </div>
         </div>
-        <script src="../scripts/tetraedro_1.js" type="module"></script>
-        <script src="../scripts/hexaedro_1.js" type="module"></script>
-        <script src="../scripts/octaedro_1.js" type="module"></script>
-        <script src="../scripts/dodecaedro_1.js" type="module"></script>
-        <script src="../scripts/icosaedro_1.js" type="module"></script>
+        <script src="../scripts/piramides_1.js" type="module"></script>
     </body>
 </html>
