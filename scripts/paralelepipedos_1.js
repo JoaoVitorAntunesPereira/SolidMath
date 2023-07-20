@@ -190,6 +190,76 @@ function range_onChange_5(){
     rangeInp_4.value = parseInt(Lb1 * divisor_1);
 }
 
+function updateMainObject_1(){
+    scene_1.remove(paralel_lines_1);
+
+    paralel_geometry_1 = new THREE.CylinderGeometry(r1, r1, h1, n1/* , 0 */); 
+    paralel_edges_1 = new THREE.EdgesGeometry(paralel_geometry_1);
+    paralel_lines_1 = new THREE.LineSegments(paralel_edges_1, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
+
+    scene_1.add(paralel_lines_1);
+}
+
+function updateHeight_1(){
+    scene_1.remove(height_line_1);
+
+    height_points_1 = [];
+    height_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
+    height_points_1.push(new THREE.Vector3(0, h1 / 2, 0));
+    height_geometry_1 = new THREE.BufferGeometry().setFromPoints(height_points_1);
+    height_line_1 = new THREE.Line(height_geometry_1, height_material_1);
+
+    scene_1.add(height_line_1);
+}
+
+function updateRadius_1(){
+    scene_1.remove(radius_line_1);
+
+    radius_points_1 = [];
+    radius_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
+    radius_points_1.push(new THREE.Vector3(0, -h1 / 2, r1));
+    radius_geometry_1 = new THREE.BufferGeometry().setFromPoints(radius_points_1);
+    radius_line_1 = new THREE.Line(radius_geometry_1, radius_material_1);
+
+    scene_1.add(radius_line_1);
+}
+
+function updateAb_1(){
+    scene_1.remove(ab_line_1);
+
+    ab_points_1 = [];
+    ab_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
+    ab_points_1.push(new THREE.Vector3(0, -h1 / 2, ab));
+    ab_geometry_1 = new THREE.BufferGeometry().setFromPoints(ab_points_1);
+    ab_line_1 = new THREE.Line(ab_geometry_1, ab_material_1);
+
+    ab_line_1.rotation.y = Math.PI / n1;
+
+    scene_1.add(ab_line_1);
+}
+
+function updateLado_1(){
+    scene_1.remove(lado_line_2);
+
+    scene_1.remove(lado_line_1);
+
+    lado_points_1 = [];
+    lado_points_1.push(new THREE.Vector3(0, -h1 / 2, r1 + d1));
+    lado_points_1.push(new THREE.Vector3((r1 + d1) * Math.sin((2 * Math.PI) / n1), -h1 / 2, (r1 + d1) * Math.cos((2 * Math.PI) / n1)));
+    lado_geometry_1 = new THREE.BufferGeometry().setFromPoints(lado_points_1);
+    lado_line_1 = new THREE.Line(lado_geometry_1, lado_material_1);
+
+    lado_points_2 = [];
+    lado_points_2.push(new THREE.Vector3(0, -h1 / 2, r1 - d1));
+    lado_points_2.push(new THREE.Vector3((r1 - d1) * Math.sin((2 * Math.PI) / n1), -h1 / 2, (r1 - d1) * Math.cos((2 * Math.PI) / n1)));
+    lado_geometry_2 = new THREE.BufferGeometry().setFromPoints(lado_points_2);
+    lado_line_2 = new THREE.Line(lado_geometry_2, lado_material_1);
+
+    scene_1.add(lado_line_2);
+
+    scene_1.add(lado_line_1);
+}
+
 function rotateCamera_Circle_1(camera, radius1, cameraRotationVelocity1, cameraRotationAngle1){
     //x: A rotação deverá ser sobre o eixo x;
     //y: Será ignorado;
@@ -219,24 +289,103 @@ function rezizeCamera_Render_1(){
     renderer_1.setSize(d3_viewer_1.clientWidth, d3_viewer_1.clientHeight);
 }
 
-function updateRelations_1(){
+function updateCalculos_1(){
+    Ab1 = (1 / 2) * Lb1 * ab * n1;//Área da base
+    Al1 = Lb1 * h1;//Área lateral (de cada face lateral)
+    Alt1 = Al1 * n1;//Área lateral total
+    At1 = 2 * Ab1 + Alt1;//Área total
+    Vt1 = Ab1 * h1;//Volume total
+    nF1 = n1 + 2;//Número de faces
+    nV1 = n1 * 2;//Número de vértices
+    nA1 = n1 * 3;//Número de arestas
+}
+
+function showCalculo_1(){
+    try{
+        let outN1_1 = document.querySelectorAll("n1_1");
+        let outLb1_1 = document.querySelectorAll("Lb1_1");
+        let outR1_1 = document.querySelectorAll("r1_1");
+        let outH1_1 = document.querySelectorAll("h1_1");
+        let outAb_1 = document.querySelectorAll("ab_1");
+        //let outA1_1 = document.querySelectorAll("a1_1");
+
+        let outAb1_1 = document.querySelectorAll("Ab1_1");
+        let outAl1_1 = document.querySelectorAll("Al1_1");
+        let outAlt1_1 = document.querySelectorAll("Alt1_1");
+        let outAt1_1 = document.querySelectorAll("At1_1");
+        let outVt1_1 = document.querySelectorAll("Vt1_1");
+
+        let out_nF1_1 = document.querySelectorAll("nF1_1");
+        let out_nV1_1 = document.querySelectorAll("nV1_1");
+        let out_nA1_1 = document.querySelectorAll("nA1_1");
+
+        outN1_1.forEach(element => {
+            element.innerHTML = n1.toString();
+        });
+
+        outLb1_1.forEach(element => {
+            element.innerHTML = Lb1.toFixed(2).toString();
+        });
     
+        outR1_1.forEach(element => {
+            element.innerHTML = r1.toFixed(2).toString();
+        });
+
+        outH1_1.forEach(element => {
+            element.innerHTML = h1.toFixed(2).toString();
+        });
+
+        outAb_1.forEach(element => {
+            element.innerHTML = ab.toFixed(2).toString();
+        });
+
+        //outA1_1.forEach(element => {
+        //    element.innerHTML = a1.toFixed(2).toString();
+        //});
+
+        //////////////////////////////////////////////////////////////////////////////
+    
+        outAb1_1.forEach(element => {
+            element.innerHTML = Ab1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outAl1_1.forEach(element => {
+            element.innerHTML = Al1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outAlt1_1.forEach(element => {
+            element.innerHTML = Alt1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outAt1_1.forEach(element => {
+            element.innerHTML = At1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outVt1_1.forEach(element => {
+            element.innerHTML = Vt1.toFixed(2).toString() + " (u.a)<power_1>3</power_1>";
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////
+
+        out_nF1_1.forEach(element => {
+            element.innerHTML = nF1.toString();
+        });
+
+        out_nV1_1.forEach(element => {
+            element.innerHTML = nV1.toString();
+        });
+
+        out_nA1_1.forEach(element => {
+            element.innerHTML = nA1.toString();
+        });
+    }
+    catch(e){
+        console.error(e.message);
+    }
 }
 
 function animate() {
 	requestAnimationFrame(animate);
-
-    scene_1.remove(lado_line_2);
-
-    scene_1.remove(lado_line_1);
-
-    scene_1.remove(ab_line_1);
-
-    scene_1.remove(radius_line_1);
-
-    scene_1.remove(height_line_1);
-
-    scene_1.remove(paralel_lines_1);
 
     cameraRotationAngle_1 = rotateCamera_Circle_1(camera_1, camera_radius_1, cameraRotationVelocity_1, cameraRotationAngle_1);
 
@@ -247,66 +396,21 @@ function animate() {
     //paralel_lines_1.position.applyEuler(new THREE.Euler(paralel_lines_1.rotation.x, paralel_lines_1.rotation.y + rotateVelocity_1, paralel_lines_1.rotation.z), "XYZ");
 
     //paralel_lines_1.geometry.dispose();
-    //paralel_lines_1.geometry = new THREE.CylinderGeometry(r1, r1, h1, n1);
+    //paralel_lines_1.geometry = new THREE.CylinderGeometry(r1, r1, h1, n1); 
 
-    paralel_geometry_1 = new THREE.CylinderGeometry(r1, r1, h1, n1/* , 0 */); 
-    paralel_edges_1 = new THREE.EdgesGeometry(paralel_geometry_1);
-    paralel_lines_1 = new THREE.LineSegments(paralel_edges_1, new THREE.LineBasicMaterial( { color: 0xffffff } ) ); 
+    updateMainObject_1();
 
-    height_points_1 = [];
-    height_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
-    height_points_1.push(new THREE.Vector3(0, h1 / 2, 0));
-    height_geometry_1 = new THREE.BufferGeometry().setFromPoints(height_points_1);
-    height_line_1 = new THREE.Line(height_geometry_1, height_material_1);
+    updateHeight_1();
 
-    radius_points_1 = [];
-    radius_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
-    radius_points_1.push(new THREE.Vector3(0, -h1 / 2, r1));
-    radius_geometry_1 = new THREE.BufferGeometry().setFromPoints(radius_points_1);
-    radius_line_1 = new THREE.Line(radius_geometry_1, radius_material_1);
+    updateRadius_1();
 
-    ab_points_1 = [];
-    ab_points_1.push(new THREE.Vector3(0, -h1 / 2, 0));
-    ab_points_1.push(new THREE.Vector3(0, -h1 / 2, ab));
-    ab_geometry_1 = new THREE.BufferGeometry().setFromPoints(ab_points_1);
-    ab_line_1 = new THREE.Line(ab_geometry_1, ab_material_1);
+    updateAb_1();
 
-    ab_line_1.rotation.y = Math.PI / n1;
+    updateLado_1();
 
-    lado_points_1 = [];
-    lado_points_1.push(new THREE.Vector3(0, -h1 / 2, r1 + d1));
-    lado_points_1.push(new THREE.Vector3((r1 + d1) * Math.sin((2 * Math.PI) / n1), -h1 / 2, (r1 + d1) * Math.cos((2 * Math.PI) / n1)));
-    lado_geometry_1 = new THREE.BufferGeometry().setFromPoints(lado_points_1);
-    lado_line_1 = new THREE.Line(lado_geometry_1, lado_material_1);
+    updateCalculos_1();
 
-    lado_points_2 = [];
-    lado_points_2.push(new THREE.Vector3(0, -h1 / 2, r1 - d1));
-    lado_points_2.push(new THREE.Vector3((r1 - d1) * Math.sin((2 * Math.PI) / n1), -h1 / 2, (r1 - d1) * Math.cos((2 * Math.PI) / n1)));
-    lado_geometry_2 = new THREE.BufferGeometry().setFromPoints(lado_points_2);
-    lado_line_2 = new THREE.Line(lado_geometry_2, lado_material_1);
-
-    Ab1 = (1 / 2) * Lb1 * ab * n1;//Área da base
-    Al1 = Lb1 * h1;//Área lateral (de cada face lateral)
-    Alt1 = Al1 * n1;//Área lateral total
-    At1 = 2 * Ab1 + Alt1;//Área total
-    Vt1 = Ab1 * h1;//Volume total
-    nF1 = n1 + 2;//Número de faces
-    nV1 = n1 * 2;//Número de vértices
-    nA1 = n1 * 3;//Número de arestas
-
-    updateRelations_1();
-
-    scene_1.add(lado_line_2);
-
-    scene_1.add(lado_line_1);
-
-    scene_1.add(ab_line_1);
-
-    scene_1.add(radius_line_1);
-
-    scene_1.add(height_line_1);
-
-    scene_1.add(paralel_lines_1);
+    showCalculo_1();
 
 	renderer_1.render(scene_1, camera_1);
 }

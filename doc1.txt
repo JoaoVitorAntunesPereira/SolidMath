@@ -74,7 +74,7 @@ versionamento do sistema;
 
         É o primeiro filho do elemento <body> de cada uma das páginas. Serve como 
     um conteiner adicional para que se faça possível um melhor manejo do design das 
-    páginas. Atua como o conteiner do conteúdo principal da página.
+    páginas, mas atua como se fosse o próprio elemento <body>.
         Deve ficar abaixo do header, se adicionado.
 
     4.2. 

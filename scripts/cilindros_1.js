@@ -5,6 +5,11 @@ var Alt1 = 0;//Área lateral total
 var At1 = 0;//Área total
 var Vt1 = 0;//Volume total
 
+//var outLabel_1 = document.querySelector("#idOutLabel_1");
+//var outLabel_2 = document.querySelector("#idOutLabel_2");
+//var outLabel_3 = document.querySelector("#idOutLabel_3");
+//var outLabel_4 = document.querySelector("#idOutLabel_4");
+
 const d3_viewer_1 = document.querySelector("#idD3_viewer_1");
 
 var rangeInp_1 = document.querySelector("#idRange_1");
@@ -171,7 +176,7 @@ function updateMainObject_1(){
 }
 
 function updateLados_1(){
-    console.log(rotationLados_2);
+    //console.log(rotationLados_2);
 
     if(!(rotationLados_1 >= th1) && l_cylinder_line_1.parent === scene_1){
         scene_1.remove(l_cylinder_line_1);
@@ -286,6 +291,57 @@ function updateCalculo_1(){
     Vt1 = (th1 / (2 * Math.PI)) * Ab1 * h1;//Volume total
 }
 
+function showCalculo_1(){
+    //outLabel_1.innerHTML = "Área da base: Ab = <s></s><frac1><num1>θ</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ r<power_1>2</power_1><s></s>= <s></s><frac1><num1>" + ((th1 / (2 * Math.PI)) * 360).toFixed(0).toString() + "°</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ " + r1.toFixed(2).toString() + "<power_1>2</power_1><s></s>= " + Ab1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>;";
+    //outLabel_2.innerHTML = "Área lateral total: Alt = <s></s><frac1><num1>θ</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ r<power_1>2</power_1><s></s>= <s></s><frac1><num1>" + ((th1 / (2 * Math.PI)) * 360).toFixed(0).toString() + "°</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ " + r1.toFixed(2).toString() + "<power_1>2</power_1><s></s>= " + Ab1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>;";
+    //outLabel_3.innerHTML = "Área total: At = 2 ∙ Ab + Alt = 2 ∙ " + Ab1.toFixed(2).toString() + " + " + Alt1.toFixed(2).toString() + " = " + At1.toFixed(2).toString();
+    //outLabel_4.innerHTML = "Volume total: V = <s></s><frac1><num1>θ</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ r<power_1>2</power_1><s></s>= <s></s><frac1><num1>" + ((th1 / (2 * Math.PI)) * 360).toFixed(0).toString() + "°</num1><div class=\"bar_1\"></div><di1>360°</di1></frac1><s></s> ∙ π ∙ " + r1.toFixed(2).toString() + "<power_1>2</power_1><s></s>= " + Ab1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>;";
+
+    try{
+        let outTh1_1 = document.querySelectorAll("th1_1");
+        let outR1_1 = document.querySelectorAll("r1_1");
+        let outH1_1 = document.querySelectorAll("h1_1");
+
+        let outAb1_1 = document.querySelectorAll("Ab1_1");
+        let outAlt1_1 = document.querySelectorAll("Alt1_1");
+        let outAt1_1 = document.querySelectorAll("At1_1");
+        let outVt1_1 = document.querySelectorAll("Vt1_1");
+
+        outTh1_1.forEach(element => {
+            element.innerHTML = ((th1 / (2 * Math.PI)) * 360).toFixed(0).toString() + "°";
+        });
+    
+        outR1_1.forEach(element => {
+            element.innerHTML = r1.toFixed(2).toString();
+        });
+
+        outH1_1.forEach(element => {
+            element.innerHTML = h1.toFixed(2).toString();
+        });
+
+        //////////////////////////////////////////////////////////////////////////////
+    
+        outAb1_1.forEach(element => {
+            element.innerHTML = Ab1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outAlt1_1.forEach(element => {
+            element.innerHTML = Alt1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outAt1_1.forEach(element => {
+            element.innerHTML = At1.toFixed(2).toString() + " (u.a)<power_1>2</power_1>";
+        });
+
+        outVt1_1.forEach(element => {
+            element.innerHTML = Vt1.toFixed(2).toString() + " (u.a)<power_1>3</power_1>";
+        });
+    }
+    catch(e){
+        console.error(e.message);
+    }
+}
+
 function rotateCamera_Circle_1(camera, radius1, cameraRotationVelocity1, cameraRotationAngle1){
     //x: A rotação deverá ser sobre o eixo x;
     //y: Será ignorado;
@@ -308,7 +364,7 @@ function rotateCamera_Circle_1(camera, radius1, cameraRotationVelocity1, cameraR
 
         rotationLados_2_1 += rotationLados_2;
 
-        console.log(rotationLados_2);
+        //console.log(rotationLados_2);
     }
 
     //if(cameraRotationAngle1 >= Math.PI){
@@ -369,6 +425,8 @@ function animate() {
     rotateLados_1();
 
     updateCalculo_1();
+
+    showCalculo_1();
 
 	renderer_1.render(scene_1, camera_1);
 }

@@ -130,6 +130,8 @@ body{
     padding-top: 30px;
     padding-bottom: 40px;
     margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
 }
 
 .obj_title_1{
@@ -245,7 +247,7 @@ input[type="range"]:focus{
 }
 
 .inp_L_1{
-    accent-color: rgb(0, 64, 255);
+    accent-color: #0066ff;
 }
 
 .inp_a_1{
@@ -270,4 +272,129 @@ input[type="range"]:focus{
 
 .inp_an_1{
     accent-color: rgb(255, 255, 0);
+}
+
+.values_conteiner_1{
+    width: 90%;
+}
+
+.values_title_1{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    text-align: center;
+    margin-top: 4vh;
+}
+
+power_1{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4px;
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.outLabels_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+s{
+    width: 5px;
+}
+
+frac1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.bar_1{
+    width: 100%;
+    height: 1px;
+    background: white;
+}
+
+th1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 255, 0);
+}
+
+r1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(0, 255, 42);
+}
+
+h1_1{
+    display: flex;
+    flex-direction: row;
+    color: red;
+}
+
+g1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 0, 255);
+}
+
+Ab1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(0, 123, 255);
+}
+
+Alt1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(0, 251, 255);
+}
+
+At1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(0, 255, 149);
+}
+
+Vt1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(132, 0, 255);
+}
+
+Lb1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 0, 255);
+}
+
+ab_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 255, 0);
+}
+
+a1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 64, 0);
+}
+
+Al1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 170, 0);
+}
+
+n1_1{
+    display: flex;
+    flex-direction: row;
+    color: rgb(120, 120, 120);
 }
