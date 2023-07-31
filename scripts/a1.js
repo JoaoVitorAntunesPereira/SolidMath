@@ -18,45 +18,49 @@ function ty_item_2_onClick(button_id)
     //deleteChilds_2();
 
     //console.log(button_id);
-
+    var test;
     sessionStorage.setItem("button_id_1", button_id);
 
     var e = document.querySelector(".iframe_1");
 
-    let numberOfButtons_1 = 5;
+    let numberOfButtons_1 = 6;
 
-    var e_button_1 = ["", "", "", "", ""];
+    var e_button_1 = ["", "", "", "", "",""];
 
     for(let i1 = 1; i1 <= numberOfButtons_1; i1++)
     {
         e_button_1[i1 - 1] = document.getElementById("item_" + i1.toString());
+        var icon = document.getElementById("icon_" + i1.toString());
 
         if("item_" + i1.toString() == button_id)
         {
             e_button_1[i1 - 1].style.setProperty("--s", 1);
+            icon.style.color = "#1e77fc";
         }
         else
         {
             e_button_1[i1 - 1].style.setProperty("--s", 0);
+            icon.style.color = "white";
         }
     }
-
     switch(button_id)
     {
         case "item_1":
-            e.src = "./poliedros_platao/poliedros_platao_1.html";
+            e.src = "./home/home.html"
             break;
         case "item_2":
-            e.src = "./piramides/piramides_1.html";
+            e.src = "./poliedros_platao/poliedros_platao_1.html";
             break;
         case "item_3":
-            e.src = "./paralelepipedos/paralelepipedos_1.html";
+            e.src = "./prismas/prismas.html";
             break;
         case "item_4":
-            e.src = "./cilindros/cilindros_1.html";
+            e.src = "./piramides/piramides_1.html";
             break;
         case "item_5":
-            e.src = "./cones/cones_1.html";
+            e.src = "./cilindros/cilindros_1.html";
             break;
+        case "item_6":
+            e.src = "./cones/cones_1.html";
     }
 }
