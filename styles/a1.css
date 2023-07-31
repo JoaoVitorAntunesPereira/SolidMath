@@ -185,6 +185,7 @@ div.poliPlat div.divsDefs{
 .obj_conteiner_2 div.divsDefs:hover{
     box-shadow: 10px 5px 5px rgba(255, 255, 255, 0.116);
     border: 1px solid rgba(255, 255, 255, 0.274);
+    transform: translate(-5px, -5px);
 }
 
 .obj_conteiner_2 div.obj_title_1{
